@@ -1,0 +1,8 @@
+
+mingit/
+mingit2/
+mingit.zip
+
+.env
+frontend/.env
+*.key

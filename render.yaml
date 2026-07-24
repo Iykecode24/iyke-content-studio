@@ -1,0 +1,68 @@
+﻿services:
+  # Python FastAPI Backend
+  - type: web
+    name: iyke-api
+    env: python
+    buildCommand: "cd backend && pip install -r requirements.txt"
+    startCommand: "cd backend && uvicorn main:app --host 0.0.0.0 --port $PORT"
+    envVars:
+      - key: DATABASE_URL
+        fromDatabase:
+          name: iyke-db
+          property: connectionString
+      - key: CELERY_BROKER_URL
+        fromService:
+          type: redis
+          name: iyke-redis
+          property: connectionString
+      - key: CELERY_RESULT_BACKEND
+        fromService:
+          type: redis
+          name: iyke-redis
+          property: connectionString
+      - key: RUNPOD_API_KEY
+        sync: false
+      - key: ELEVENLABS_API_KEY
+        sync: false
+      - key: R2_ACCOUNT_ID
+        sync: false
+      - key: R2_ACCESS_KEY_ID
+        sync: false
+      - key: R2_SECRET_ACCESS_KEY
+        sync: false
+
+  # Celery Worker
+  - type: worker
+    name: iyke-celery
+    env: python
+    buildCommand: "cd backend && pip install -r requirements.txt"
+    startCommand: "cd backend && celery -A workers.render_worker.celery_app worker --loglevel=info"
+    envVars:
+      - key: DATABASE_URL
+        fromDatabase:
+          name: iyke-db
+          property: connectionString
+      - key: CELERY_BROKER_URL
+        fromService:
+          type: redis
+          name: iyke-redis
+          property: connectionString
+      - key: CELERY_RESULT_BACKEND
+        fromService:
+          type: redis
+          name: iyke-redis
+          property: connectionString
+      - key: RUNPOD_API_KEY
+        sync: false
+      - key: ELEVENLABS_API_KEY
+        sync: false
+
+databases:
+  - name: iyke-db
+    databaseName: iyke_studio
+    user: iyke_user
+    plan: free
+
+  - type: redis
+    name: iyke-redis
+    plan: free
