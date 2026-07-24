@@ -74,3 +74,5 @@ export default defineConfig([
 
 
 Deploy with Cloudflare secrets.
+
+Deploy after project creation.
