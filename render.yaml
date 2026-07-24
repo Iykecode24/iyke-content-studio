@@ -4,7 +4,7 @@
     name: iyke-api
     env: python
     buildCommand: "cd backend && pip install -r requirements.txt"
-    startCommand: "cd backend && uvicorn main:app --host 0.0.0.0 --port $PORT"
+    startCommand: "cd backend && uvicorn main:app --host 0.0.0.0 --port `$PORT"
     envVars:
       - key: DATABASE_URL
         fromDatabase:
@@ -57,13 +57,13 @@
       - key: ELEVENLABS_API_KEY
         sync: false
 
+  # Redis (Key-Value Store)
+  - type: keyvalue
+    name: iyke-redis
+    plan: free
+
 databases:
   - name: iyke-db
     databaseName: iyke_studio
     user: iyke_user
     plan: free
-
-  - type: keyvalue
-    name: iyke-redis
-    plan: free
-
