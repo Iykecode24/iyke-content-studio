@@ -72,3 +72,5 @@ export default defineConfig([
 ])
 ```
 
+
+Deploy with Cloudflare secrets.
