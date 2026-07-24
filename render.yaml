@@ -61,9 +61,11 @@
   - type: keyvalue
     name: iyke-redis
     plan: free
+    ipAllowList: []
 
 databases:
   - name: iyke-db
     databaseName: iyke_studio
     user: iyke_user
     plan: free
+
