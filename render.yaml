@@ -12,12 +12,12 @@
           property: connectionString
       - key: CELERY_BROKER_URL
         fromService:
-          type: redis
+          type: keyvalue
           name: iyke-redis
           property: connectionString
       - key: CELERY_RESULT_BACKEND
         fromService:
-          type: redis
+          type: keyvalue
           name: iyke-redis
           property: connectionString
       - key: RUNPOD_API_KEY
@@ -44,12 +44,12 @@
           property: connectionString
       - key: CELERY_BROKER_URL
         fromService:
-          type: redis
+          type: keyvalue
           name: iyke-redis
           property: connectionString
       - key: CELERY_RESULT_BACKEND
         fromService:
-          type: redis
+          type: keyvalue
           name: iyke-redis
           property: connectionString
       - key: RUNPOD_API_KEY
@@ -63,6 +63,7 @@ databases:
     user: iyke_user
     plan: free
 
-  - type: redis
+  - type: keyvalue
     name: iyke-redis
     plan: free
+
